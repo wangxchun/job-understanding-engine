@@ -8,6 +8,25 @@ This README documents the engineering system, not just the feature list.
 
 ---
 
+## Quick Start
+
+```bash
+git clone https://github.com/wangxchun/job-understanding-engine.git
+cd job-understanding-engine
+
+python -m venv .venv
+source .venv/bin/activate      # Windows: .venv\Scripts\activate
+
+pip install -e ".[dev]"        # dev extra pulls in pytest
+pytest                         # run the full test suite
+
+python examples/extract_job.py examples/sample_posting.txt
+```
+
+The core package (`RuleBasedExtractor`) is pure stdlib and works out of the box. `LLMExtractor` additionally needs the Anthropic SDK and an API key — see [Development](#6-development).
+
+---
+
 ## 1. The Problem
 
 Job descriptions are written for humans, not machines. A real captured posting mixes the actual content with:
@@ -140,9 +159,11 @@ examples/
 ## 6. Development
 
 ```bash
-# Install (LLM extra needed for LLMExtractor; not required for
-# rule-based extraction alone)
-pip install -e ".[llm]"
+# Install with dev extras (pytest) to run the test suite
+pip install -e ".[dev]"
+
+# Add the llm extra too if you'll also use LLMExtractor
+pip install -e ".[dev,llm]"
 
 # Run the full test suite
 pytest tests/
