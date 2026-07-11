@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import sys
 
-from job_understanding import RuleBasedExtractor
+from job_understanding import ExtractorRouter, LLMExtractor, RuleBasedExtractor
 
 
 def main() -> None:
@@ -17,7 +17,7 @@ def main() -> None:
 
     text = open(sys.argv[1], encoding="utf-8").read()
 
-    extractor = RuleBasedExtractor()
+    extractor = ExtractorRouter(primary=LLMExtractor(), fallback=RuleBasedExtractor())
     result = extractor.extract_from_text(text)
 
     print(f"Title:            {result.job.title}")
