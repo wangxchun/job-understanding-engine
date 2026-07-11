@@ -172,6 +172,12 @@ Add the `llm` extra too if you'll also use `LLMExtractor`:
 pip install -e ".[dev,llm]"
 ```
 
+Installing the `llm` extra only pulls in the Anthropic SDK — it does not by itself turn on LLM extraction. `ExtractorRouter` only takes the LLM path when `ANTHROPIC_API_KEY` is set; without it, extraction runs entirely on the zero-cost `RuleBasedExtractor`. Enable it with:
+
+```bash
+export ANTHROPIC_API_KEY="your_api_key_here"
+```
+
 ### Run the tests
 
 ```bash
@@ -200,18 +206,20 @@ python examples/extract_job.py path/to/your_job_posting.txt
 
 The input file should contain raw job posting text in plain text format (for example, text copied from a job board).
 
-```python
-from job_understanding import RuleBasedExtractor
+The command above is the same whether or not LLM extraction is enabled: without `ANTHROPIC_API_KEY` set, it runs on the `RuleBasedExtractor` fallback; with it set, `ExtractorRouter` can use `LLMExtractor` instead. One interface either way — you never need a different command or flag to switch between them.
 
-extractor = RuleBasedExtractor()
+The recommended entry point is `ExtractorRouter`, which gives you that same LLM-first/rule-based-fallback behavior directly in code:
+
+```python
+from job_understanding import ExtractorRouter, LLMExtractor, RuleBasedExtractor
+
+extractor = ExtractorRouter(primary=LLMExtractor(), fallback=RuleBasedExtractor())
 result = extractor.extract_from_text(open("posting.txt").read())
 
 print(result.job.title, "@", result.job.company)
 print(result.summary)
 print(result.required_skills)
 ```
-
-To use `LLMExtractor` or `ExtractorRouter`, set `ANTHROPIC_API_KEY` in your environment.
 
 ---
 
