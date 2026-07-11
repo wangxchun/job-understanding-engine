@@ -11,10 +11,9 @@ We're a 40-person team shipping hardware and ML software together.
 
 About the job
 
-We are looking for a Machine Learning Engineer to build and deploy the
-perception models that power our robots' autonomous navigation and defect
-detection. You will work closely with the robotics and platform teams to
-take models from prototype to production on embedded hardware.
+We are looking for a Machine Learning Engineer to build and deploy the perception models that power our robots' autonomous navigation and defect detection.
+
+You will work closely with the robotics and platform teams to take models from prototype to production on embedded hardware.
 
 Responsibilities
 
