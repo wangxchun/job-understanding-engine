@@ -158,22 +158,47 @@ examples/
 
 ## 6. Development
 
+### Install
+
+Installs the `dev` extra, which includes `pytest`:
+
 ```bash
-# Install with dev extras (pytest) to run the test suite
 pip install -e ".[dev]"
-
-# Add the llm extra too if you'll also use LLMExtractor
-pip install -e ".[dev,llm]"
-
-# Run the full test suite
-pytest tests/
-
-# Run just the extraction-quality/regression-corpus tests
-pytest tests/test_extraction_quality.py -v
-
-# Try it on a job posting
-python examples/extract_job.py path/to/posting.txt
 ```
+
+Add the `llm` extra too if you'll also use `LLMExtractor`:
+
+```bash
+pip install -e ".[dev,llm]"
+```
+
+### Run the tests
+
+```bash
+pytest tests/
+```
+
+Run just the extraction-quality/regression-corpus tests:
+
+```bash
+pytest tests/test_extraction_quality.py -v
+```
+
+### Try it on a job posting
+
+Use the included example:
+
+```bash
+python examples/extract_job.py examples/sample_posting.txt
+```
+
+Or provide your own job posting text file:
+
+```bash
+python examples/extract_job.py path/to/your_job_posting.txt
+```
+
+The input file should contain raw job posting text in plain text format (for example, text copied from a job board).
 
 ```python
 from job_understanding import RuleBasedExtractor
