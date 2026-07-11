@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "job-understanding-engine"
+version = "0.1.0"
+description = "Evidence-driven job understanding engine that transforms noisy job postings into structured hiring intelligence."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+
+# The core package (rule-based extraction, schema, skill catalog) is
+# pure stdlib — no mandatory external dependencies. LLMExtractor needs
+# the Anthropic SDK; install it with: pip install -e ".[llm]"
+dependencies = []
+
+[project.optional-dependencies]
+llm = [
+    "anthropic>=0.25",
+]
+dev = [
+    "pytest>=7.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
