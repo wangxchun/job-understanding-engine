@@ -201,10 +201,10 @@ python examples/extract_job.py examples/sample_posting.txt
 Or provide your own job posting text file:
 
 ```bash
-python examples/extract_job.py path/to/your_job_posting.txt
+python examples/extract_job.py <job_posting.txt>
 ```
 
-The input file should contain raw job posting text in plain text format (for example, text copied from a job board).
+Create a plain text file (for example, `job_posting.txt`) containing the raw job posting text copied from a job board, then pass that file to the command above.
 
 The command above is the same whether or not LLM extraction is enabled: without `ANTHROPIC_API_KEY` set, it runs on the `RuleBasedExtractor` fallback; with it set, `ExtractorRouter` can use `LLMExtractor` instead. One interface either way — you never need a different command or flag to switch between them.
 
